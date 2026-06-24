@@ -11,7 +11,6 @@ def get_df_with_csv_info(filename: Path) -> dd.DataFrame:
     pdf = df.compute()
     display(pdf.head())
     pdf.info()
-    display(pdf.describe())
     null_counts = pdf.isnull().sum()
     null_pct = (null_counts / len(pdf) * 100).round(2)
     display(
@@ -20,4 +19,5 @@ def get_df_with_csv_info(filename: Path) -> dd.DataFrame:
         .query("null_count > 0")
         .sort_values("null_count", ascending=False)
     )
+    display(pdf.describe())
     return df
